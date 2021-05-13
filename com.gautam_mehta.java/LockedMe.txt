@@ -5,52 +5,51 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class WelcomeScreen {
+public class LockedMe {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		WelcomeScreen C = new WelcomeScreen();
+		LockedMe C = new LockedMe();
 		C.crown_method();
 		System.out.println("      **LockedMe.com***" + "\n" + "      *****************" + "\n" + "       -Developed By Gautam");
 		Scanner s = new Scanner(System.in);
 		System.out.println("\n" + "Enter your name to access the menu");
 		String name = s.next();
 		System.out.println("Hello " + name + "\n" + "Welcome to Lockedme.com. Please enter an input");
-		WelcomeScreen M = new WelcomeScreen();
+		LockedMe M = new LockedMe();
 		M.Mainmenu();
 		s.close();
 	}
 	
-	private void Mainmenu() {
-		System.out.println("**************Main Menu*************" + "\n" + "Enter 1 to show current in ascending orders" + "\n" + "Enter 2 for file Manager" + "\n" + "Enter 3 to close the application");
+	  private void Mainmenu() {
+		System.out.println("**************Main Menu*************" + "\n" + "Enter 1 to show files in ascending orders in a directory" + "\n" + "Enter 2 for file Manager" + "\n" + "Enter 3 to close the application");
 		
 		try {
 			Scanner s1 = new Scanner (System.in);
 		Integer input2 = s1.nextInt();
 		//try {
 		switch (input2){
-			case 2:
+		case 1: {
+			showFiles();
+		}
+			//break;
+		case 2: {
 		filemanager2();
-		break;
-		
-		case 1:
-			showFiles1();
-			break;
-		case 3:
+		}
+		    //break;
+		case 3: {
 			System.out.println("Program has been Closed");
 			System.exit(input2);
-			break;
-		} 
-		s1.close();
-		}
-		catch (Exception e) {
+			//break;
+		} } }
+		catch(Exception e) {
 			System.out.println("Please enter a valid input");
 			Mainmenu();
 		}
-	}
+		}
 
 	 File folder_name;
-	private void showFiles1() {
+	private void showFiles() {
 		try {
 		System.out.println("Enter path");
 		Scanner sf = new Scanner(System.in);
@@ -61,20 +60,19 @@ public class WelcomeScreen {
 	for (String pathname:showfile) {
 	System.out.println(pathname + "\n");
 	}
-	sf.close();
+	//sf.close(); it keeps repeating the execution
 		}
-		finally {
-	System.out.println("File not found");
+		catch(Exception e) {
+	System.out.println("File not found\n\n");
 		}
 	Mainmenu();
-            
-	
         }
+	
 	private void filemanager2() {
 		System.out.println("Enter 1 to create a file" + "\n" + "Enter 2 for delete the file" + "\n" + "Enter 3 to search the file" + "\n" + "Enter 4 to Go back to main menu");
 	Scanner i = new Scanner(System.in); //User input
 	Integer input = i.nextInt(); //Store input to "input" variable
-	i.close();
+	//i.close(); it keeps repeating the execution
 	try {
 	switch (input){
 		case 1:
@@ -84,11 +82,11 @@ public class WelcomeScreen {
 			 try {
 			      File myObj = new File(file1);
 			      myObj.createNewFile();
-			        System.out.println("File created: " + myObj.getName()); //file created
+			        System.out.println("File created: " + myObj.getName()+"\n"); //file created
 			        filemanager2();
-			      } catch (IOException e1) {
+			      } catch (Exception e) {
 			        System.out.println("Invalid file path or name");
-			        e1.printStackTrace();
+			       // e1.printStackTrace();
 			        filemanager2();
 			      }
 			break;
@@ -116,10 +114,10 @@ public class WelcomeScreen {
 			String searchfile = sf.nextLine();
 			File f1 = new File(path1);
 		String[] showfile = f1.list();
+		System.out.println("search results:\n");
 		for (String pathname:showfile) {
 			if(pathname.contains(searchfile)) {
-		System.out.println("Search result: " + pathname + "\n");
-	        
+		System.out.println(pathname + "\n");
 	        }
 		}
 		case 4:
